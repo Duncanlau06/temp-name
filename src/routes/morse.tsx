@@ -86,20 +86,26 @@ const Morse: React.FC = () => {
   const onMouseUp = () => {
     setMorseTF("Morse");
     const duration = Date.now() - pressStart.current;
+    var toAdd = "";
     if(duration<500){
-      setMorse(morse + ".");
+      toAdd = ".";
     }else if(duration >= 500 && duration < 1000){
-      setMorse(morse + "-");
+      toAdd = "-";
     }else if(duration >= 1000 && duration <= 1500){
-      setMorse(morse + " ");
+      toAdd = " ";
     }else{
-      setMorse(morse + "/");
+      toAdd = "/";
     }
-    setInput(morseToText(morse));
+    const nextMorse = morse + toAdd;
+    setMorse(nextMorse);
+    setInput(morseToText(nextMorse));
+    
+   
     if(timeRef.current !== null){
       clearInterval(timeRef.current);
       timeRef.current = null;
     }
+
     
   }
   
