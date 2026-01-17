@@ -14,6 +14,7 @@ import { Route as ScuffedRouteImport } from './routes/scuffed'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as PhoneNumberRouteImport } from './routes/phoneNumber'
 import { Route as MorseRouteImport } from './routes/morse'
+import { Route as LostwoodsRouteImport } from './routes/lostwoods'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -42,6 +43,11 @@ const MorseRoute = MorseRouteImport.update({
   path: '/morse',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LostwoodsRoute = LostwoodsRouteImport.update({
+  id: '/lostwoods',
+  path: '/lostwoods',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -56,6 +62,7 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/lostwoods': typeof LostwoodsRoute
   '/morse': typeof MorseRoute
   '/phoneNumber': typeof PhoneNumberRoute
   '/register': typeof RegisterRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/lostwoods': typeof LostwoodsRoute
   '/morse': typeof MorseRoute
   '/phoneNumber': typeof PhoneNumberRoute
   '/register': typeof RegisterRoute
@@ -75,6 +83,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/lostwoods': typeof LostwoodsRoute
   '/morse': typeof MorseRoute
   '/phoneNumber': typeof PhoneNumberRoute
   '/register': typeof RegisterRoute
@@ -86,6 +95,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/login'
+    | '/lostwoods'
     | '/morse'
     | '/phoneNumber'
     | '/register'
@@ -95,6 +105,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/login'
+    | '/lostwoods'
     | '/morse'
     | '/phoneNumber'
     | '/register'
@@ -104,6 +115,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/login'
+    | '/lostwoods'
     | '/morse'
     | '/phoneNumber'
     | '/register'
@@ -114,6 +126,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LoginRoute: typeof LoginRoute
+  LostwoodsRoute: typeof LostwoodsRoute
   MorseRoute: typeof MorseRoute
   PhoneNumberRoute: typeof PhoneNumberRoute
   RegisterRoute: typeof RegisterRoute
@@ -158,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MorseRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lostwoods': {
+      id: '/lostwoods'
+      path: '/lostwoods'
+      fullPath: '/lostwoods'
+      preLoaderRoute: typeof LostwoodsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -178,6 +198,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoginRoute: LoginRoute,
+  LostwoodsRoute: LostwoodsRoute,
   MorseRoute: MorseRoute,
   PhoneNumberRoute: PhoneNumberRoute,
   RegisterRoute: RegisterRoute,

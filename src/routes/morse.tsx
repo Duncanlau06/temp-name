@@ -129,11 +129,13 @@ const Morse: React.FC = () => {
       justifyContent: "center",
       alignItems: "center",
       height: "100vh",
-      width: "100vw"
+      width: "100wh"
 
     }}
     >
-      
+      <TextField
+        
+      />
       <TextField
         label={morseTF}
         defaultValue="Output"
