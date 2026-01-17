@@ -12,6 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DemoRhythmRouteImport } from './routes/demo/rhythm'
+import { Route as DemoPhoneRouteImport } from './routes/demo/phone'
+import { Route as DemoKeyboardRouteImport } from './routes/demo/keyboard'
 
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
@@ -28,35 +31,81 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DemoRhythmRoute = DemoRhythmRouteImport.update({
+  id: '/demo/rhythm',
+  path: '/demo/rhythm',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoPhoneRoute = DemoPhoneRouteImport.update({
+  id: '/demo/phone',
+  path: '/demo/phone',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoKeyboardRoute = DemoKeyboardRouteImport.update({
+  id: '/demo/keyboard',
+  path: '/demo/keyboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/demo/keyboard': typeof DemoKeyboardRoute
+  '/demo/phone': typeof DemoPhoneRoute
+  '/demo/rhythm': typeof DemoRhythmRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/demo/keyboard': typeof DemoKeyboardRoute
+  '/demo/phone': typeof DemoPhoneRoute
+  '/demo/rhythm': typeof DemoRhythmRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/demo/keyboard': typeof DemoKeyboardRoute
+  '/demo/phone': typeof DemoPhoneRoute
+  '/demo/rhythm': typeof DemoRhythmRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/register'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/demo/keyboard'
+    | '/demo/phone'
+    | '/demo/rhythm'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/register'
-  id: '__root__' | '/' | '/login' | '/register'
+  to:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/demo/keyboard'
+    | '/demo/phone'
+    | '/demo/rhythm'
+  id:
+    | '__root__'
+    | '/'
+    | '/login'
+    | '/register'
+    | '/demo/keyboard'
+    | '/demo/phone'
+    | '/demo/rhythm'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
+  DemoKeyboardRoute: typeof DemoKeyboardRoute
+  DemoPhoneRoute: typeof DemoPhoneRoute
+  DemoRhythmRoute: typeof DemoRhythmRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +131,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/demo/rhythm': {
+      id: '/demo/rhythm'
+      path: '/demo/rhythm'
+      fullPath: '/demo/rhythm'
+      preLoaderRoute: typeof DemoRhythmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/phone': {
+      id: '/demo/phone'
+      path: '/demo/phone'
+      fullPath: '/demo/phone'
+      preLoaderRoute: typeof DemoPhoneRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/keyboard': {
+      id: '/demo/keyboard'
+      path: '/demo/keyboard'
+      fullPath: '/demo/keyboard'
+      preLoaderRoute: typeof DemoKeyboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +159,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
+  DemoKeyboardRoute: DemoKeyboardRoute,
+  DemoPhoneRoute: DemoPhoneRoute,
+  DemoRhythmRoute: DemoRhythmRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
