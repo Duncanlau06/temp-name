@@ -52,6 +52,13 @@ function RouteComponent() {
         }}>
             
         </Box>
+        <Stack
+            direction = "row"
+            sx = {{
+                backgroundColor: "#f0f0f0"
+            }}  
+            
+        >
         <Button
             
             href="/login"
@@ -67,6 +74,10 @@ function RouteComponent() {
         >
             What's This
         </Button>
+        
+
+        </Stack>
+        
 
 
 
