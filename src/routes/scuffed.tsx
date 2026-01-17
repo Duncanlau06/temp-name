@@ -9,8 +9,9 @@ type Target = {
   value: number;
 };
 
-const GRAVITY = 0.4;
-const WALL_BOUNCE = 0.7;
+const GRAVITY = 0;
+const CONST_FRICTION = 0.99  ;
+const WALL_BOUNCE = 1.1;
 const TARGET_RADIUS = 20;
 
 const createTarget = (
@@ -93,6 +94,7 @@ const AngryNumbers: React.FC = () => {
         tvy += GRAVITY;
         tx += tvx;
         ty += tvy;
+        
         ctx.beginPath();
         ctx.arc(tx, ty, 2, 0, Math.PI * 2);
         ctx.fill();
@@ -107,6 +109,9 @@ const AngryNumbers: React.FC = () => {
         ball.current.vy += GRAVITY;
         ball.current.x += ball.current.vx;
         ball.current.y += ball.current.vy;
+        ball.current.vx *= CONST_FRICTION;
+        ball.current.vy *= CONST_FRICTION;
+
 
         // Walls
         if (ball.current.x < ball.current.r) {

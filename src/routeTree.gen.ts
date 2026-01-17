@@ -9,13 +9,31 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ScuffedRouteImport } from './routes/scuffed'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as PhoneNumberRouteImport } from './routes/phoneNumber'
+import { Route as MorseRouteImport } from './routes/morse'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as IndexRouteImport } from './routes/index'
 
+const ScuffedRoute = ScuffedRouteImport.update({
+  id: '/scuffed',
+  path: '/scuffed',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PhoneNumberRoute = PhoneNumberRouteImport.update({
+  id: '/phoneNumber',
+  path: '/phoneNumber',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MorseRoute = MorseRouteImport.update({
+  id: '/morse',
+  path: '/morse',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -32,40 +50,86 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/morse': typeof MorseRoute
+  '/phoneNumber': typeof PhoneNumberRoute
   '/register': typeof RegisterRoute
+  '/scuffed': typeof ScuffedRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/morse': typeof MorseRoute
+  '/phoneNumber': typeof PhoneNumberRoute
   '/register': typeof RegisterRoute
+  '/scuffed': typeof ScuffedRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/morse': typeof MorseRoute
+  '/phoneNumber': typeof PhoneNumberRoute
   '/register': typeof RegisterRoute
+  '/scuffed': typeof ScuffedRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/register'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/morse'
+    | '/phoneNumber'
+    | '/register'
+    | '/scuffed'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/register'
-  id: '__root__' | '/' | '/login' | '/register'
+  to: '/' | '/login' | '/morse' | '/phoneNumber' | '/register' | '/scuffed'
+  id:
+    | '__root__'
+    | '/'
+    | '/login'
+    | '/morse'
+    | '/phoneNumber'
+    | '/register'
+    | '/scuffed'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LoginRoute: typeof LoginRoute
+  MorseRoute: typeof MorseRoute
+  PhoneNumberRoute: typeof PhoneNumberRoute
   RegisterRoute: typeof RegisterRoute
+  ScuffedRoute: typeof ScuffedRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/scuffed': {
+      id: '/scuffed'
+      path: '/scuffed'
+      fullPath: '/scuffed'
+      preLoaderRoute: typeof ScuffedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/register': {
       id: '/register'
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/phoneNumber': {
+      id: '/phoneNumber'
+      path: '/phoneNumber'
+      fullPath: '/phoneNumber'
+      preLoaderRoute: typeof PhoneNumberRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/morse': {
+      id: '/morse'
+      path: '/morse'
+      fullPath: '/morse'
+      preLoaderRoute: typeof MorseRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -88,7 +152,10 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoginRoute: LoginRoute,
+  MorseRoute: MorseRoute,
+  PhoneNumberRoute: PhoneNumberRoute,
   RegisterRoute: RegisterRoute,
+  ScuffedRoute: ScuffedRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
