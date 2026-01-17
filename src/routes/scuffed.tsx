@@ -10,7 +10,7 @@ type Target = {
 };
 
 const GRAVITY = 0;
-const CONST_FRICTION = 0.99  ;
+const CONST_FRICTION = 1;
 const WALL_BOUNCE = 1.1;
 const TARGET_RADIUS = 20;
 
@@ -205,7 +205,7 @@ const AngryNumbers: React.FC = () => {
 
     const rect = canvasRef.current!.getBoundingClientRect();
     mouse.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-
+    
     velocity.current = {
       x: (ball.current.x - mouse.current.x) * 0.1,
       y: (ball.current.y - mouse.current.y) * 0.1,
