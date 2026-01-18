@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 import TextFieldWithKeyboard from '../components/TextFieldWithKeyboard'
 import RhythmPin from '../components/RhythmPin'
-import { defaultUsers } from '../data/data'
+import { defaultUsers } from '../data/users'
 
 export const Route = createFileRoute('/login')({
   component: LoginFlow,

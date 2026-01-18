@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DemoSecurityRouteImport } from './routes/demo/security'
 import { Route as DemoRhythmRouteImport } from './routes/demo/rhythm'
 import { Route as DemoPhoneRouteImport } from './routes/demo/phone'
 import { Route as DemoKeyboardRouteImport } from './routes/demo/keyboard'
@@ -30,6 +31,11 @@ const LoginRoute = LoginRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoSecurityRoute = DemoSecurityRouteImport.update({
+  id: '/demo/security',
+  path: '/demo/security',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoRhythmRoute = DemoRhythmRouteImport.update({
@@ -61,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/demo/keyboard': typeof DemoKeyboardRoute
   '/demo/phone': typeof DemoPhoneRoute
   '/demo/rhythm': typeof DemoRhythmRoute
+  '/demo/security': typeof DemoSecurityRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +77,7 @@ export interface FileRoutesByTo {
   '/demo/keyboard': typeof DemoKeyboardRoute
   '/demo/phone': typeof DemoPhoneRoute
   '/demo/rhythm': typeof DemoRhythmRoute
+  '/demo/security': typeof DemoSecurityRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +88,7 @@ export interface FileRoutesById {
   '/demo/keyboard': typeof DemoKeyboardRoute
   '/demo/phone': typeof DemoPhoneRoute
   '/demo/rhythm': typeof DemoRhythmRoute
+  '/demo/security': typeof DemoSecurityRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +100,7 @@ export interface FileRouteTypes {
     | '/demo/keyboard'
     | '/demo/phone'
     | '/demo/rhythm'
+    | '/demo/security'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +110,7 @@ export interface FileRouteTypes {
     | '/demo/keyboard'
     | '/demo/phone'
     | '/demo/rhythm'
+    | '/demo/security'
   id:
     | '__root__'
     | '/'
@@ -109,6 +120,7 @@ export interface FileRouteTypes {
     | '/demo/keyboard'
     | '/demo/phone'
     | '/demo/rhythm'
+    | '/demo/security'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -119,6 +131,7 @@ export interface RootRouteChildren {
   DemoKeyboardRoute: typeof DemoKeyboardRoute
   DemoPhoneRoute: typeof DemoPhoneRoute
   DemoRhythmRoute: typeof DemoRhythmRoute
+  DemoSecurityRoute: typeof DemoSecurityRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -142,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/security': {
+      id: '/demo/security'
+      path: '/demo/security'
+      fullPath: '/demo/security'
+      preLoaderRoute: typeof DemoSecurityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demo/rhythm': {
@@ -183,6 +203,7 @@ const rootRouteChildren: RootRouteChildren = {
   DemoKeyboardRoute: DemoKeyboardRoute,
   DemoPhoneRoute: DemoPhoneRoute,
   DemoRhythmRoute: DemoRhythmRoute,
+  DemoSecurityRoute: DemoSecurityRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

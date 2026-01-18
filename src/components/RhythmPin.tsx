@@ -13,13 +13,16 @@ interface Note {
   hit: boolean
 }
 
-// interface RhythmPinProps extends Omit<TextFieldProps, 'value' | 'onChange'> {}
-type RhythmPinProps = TextFieldProps & {
+type RhythmPinProps = Omit<TextFieldProps, 'value' | 'onChange'> & {
   onPinChange?: (value: string) => void
+  targetPin?: string
+  onComplete?: (success: boolean, combo: number) => void
 }
 
 export default function RhythmPin({
   onPinChange,
+  targetPin,
+  onComplete,
   ...textFieldProps
 }: RhythmPinProps) {
   const [pin, setPin] = useState('')
@@ -29,6 +32,7 @@ export default function RhythmPin({
     Record<string, 'hit' | 'miss' | null>
   >({})
   const [combo, setCombo] = useState(0)
+  const [maxCombo, setMaxCombo] = useState(0)
 
   // Game loop refs
   const requestRef = useRef<number | undefined>(undefined)
@@ -57,11 +61,22 @@ export default function RhythmPin({
 
   const lastSpawnTime = useRef<number>(0)
 
+  // Track max combo
+  useEffect(() => {
+    if (combo > maxCombo) {
+      setMaxCombo(combo)
+    }
+  }, [combo, maxCombo])
+
   useEffect(() => {
     if (onPinChange) {
       onPinChange(pin)
     }
-  }, [pin, onPinChange])
+    // Check if PIN matches target
+    if (targetPin && pin === targetPin && onComplete) {
+      onComplete(true, maxCombo)
+    }
+  }, [pin, onPinChange, targetPin, onComplete, maxCombo])
 
   const spawnNote = (time: number) => {
     if (time - lastSpawnTime.current > SPAWN_RATE) {

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import {
   AppBar,
   Box,
+  Chip,
   Dialog,
   DialogContent,
   DialogTitle,
@@ -20,6 +21,7 @@ import {
 import {
   Calculator,
   ChevronLeft,
+  Clock,
   Home,
   Keyboard as KeyboardIcon,
   LogIn,
@@ -29,11 +31,14 @@ import {
   UserPlus,
   X,
 } from 'lucide-react'
+import { useRegistration, formatTime } from '../context/RegistrationContext'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false)
   const toggleDrawer = () => setIsOpen(!isOpen)
+  
+  const { timerRunning, elapsed } = useRegistration()
 
   const navItems = [
     { label: 'Home', path: '/', icon: <Home size={20} /> },
@@ -50,6 +55,7 @@ export default function Header() {
       icon: <KeyboardIcon size={20} />,
     },
     { label: 'Date Demo', path: '/demo/date', icon: <Phone size={20} /> },
+    { label: 'Security Demo', path: '/demo/security', icon: <UserPlus size={20} /> },
   ]
 
   return (
@@ -76,6 +82,25 @@ export default function Header() {
           >
             INPUT HELL
           </Typography>
+          
+          {timerRunning && (
+            <Chip
+              icon={<Clock size={16} />}
+              label={formatTime(elapsed)}
+              color="error"
+              sx={{ 
+                mr: 2, 
+                fontFamily: 'monospace',
+                fontWeight: 'bold',
+                animation: 'pulse 1s infinite',
+                '@keyframes pulse': {
+                  '0%, 100%': { opacity: 1 },
+                  '50%': { opacity: 0.7 },
+                },
+              }}
+            />
+          )}
+          
           <IconButton
             color="inherit"
             onClick={() => setIsCalculatorOpen(true)}
