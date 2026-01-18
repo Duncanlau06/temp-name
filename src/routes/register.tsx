@@ -17,7 +17,7 @@ import RhythmPin from '../components/RhythmPin'
 import SecurityQuestions from '../components/SecurityQuestions'
 import TextFieldWithKeyboard from '../components/TextFieldWithKeyboard'
 import Leaderboard from '../components/Leaderboard'
-import { saveUserData } from '../data/data'
+import { saveUserData } from '../data/Data'
 
 export const Route = createFileRoute('/register')({
   component: RegisterFlow,

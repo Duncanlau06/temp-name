@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from 'react'
-import { loadUserData } from '../data/data'
+import { loadUserData } from '../data/Data'
 
 interface LeaderboardEntry {
   username: string
